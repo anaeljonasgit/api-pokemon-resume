@@ -13,16 +13,16 @@ app.get('/pokemon/:pokemon_name_or_id', async (req, res) => {
     axios.get(`https://pokeapi.co/api/v2/pokemon/${req.params.pokemon_name_or_id}`)
         .then(response => {
             if (response.data) {
-                let { id, name, abilities, height, weight } = response.data;
+                let { id, name, abilities, base_experience, types, height, weight } = response.data;
 
                 return res.status(200).send({
-                    id, name, abilities, height, weight
+                    id, name, abilities, base_experience, types, height, weight
                 });
             };
 
             return res.status(400).send({ error: 'Nada encontrado' });
         }).catch(error => {
-            res.status(400).send({ error });
+            return res.status(400).send({ error: 'Nada encontrado' });
         });
 });
 
